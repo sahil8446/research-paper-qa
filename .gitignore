@@ -17,6 +17,7 @@ data/processed/*
 
 # Vector store / caches
 qdrant_storage/
+data/qdrant_local/
 .cache/
 
 # OS / editor

@@ -1,6 +1,10 @@
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 ROOT = Path(__file__).resolve().parents[2]
+load_dotenv(ROOT / ".env")  # local dev: ANTHROPIC_API_KEY etc.; no-op if the file is absent
 DATA_DIR = ROOT / "data"
 RAW_PDF_DIR = DATA_DIR / "raw_pdfs"
 PROCESSED_DIR = DATA_DIR / "processed"
@@ -33,3 +37,16 @@ SEARCH_QUERIES = [
     'abs:"hallucination" AND abs:"retrieval"',
 ]
 SEARCH_CATEGORIES = ["cs.CL", "cs.IR", "cs.AI", "cs.LG"]
+
+# Vector store: a real Qdrant server (QDRANT_URL set, e.g. Docker on localhost:6333) if
+# available, otherwise a local on-disk collection needing no server at all -- same client
+# API either way, so switching later is a one-line config change, not a code change.
+QDRANT_URL = os.environ.get("QDRANT_URL")  # e.g. "http://localhost:6333"
+QDRANT_LOCAL_PATH = str(DATA_DIR / "qdrant_local")
+QDRANT_COLLECTION = "paper_chunks"
+TOP_K = 5
+
+# Answer generation. Kept swappable (per the project's own goal of comparing models on cost
+# and quality) via an env var; defaults to Opus 5.
+ANSWER_MODEL = os.environ.get("ANSWER_MODEL", "claude-opus-5")
+

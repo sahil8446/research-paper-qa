@@ -9,6 +9,11 @@ dependencies = [
     "pymupdf",
     "pydantic>=2",
     "tqdm",
+    "sentence-transformers",
+    "qdrant-client",
+    "anthropic",
+    "python-dotenv",
+    "streamlit",
 ]
 
 [project.optional-dependencies]
