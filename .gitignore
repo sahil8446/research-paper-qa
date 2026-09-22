@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Data: downloaded PDFs and generated artifacts stay local (link to arXiv instead)
+data/raw_pdfs/*
+data/processed/*
+!data/raw_pdfs/.gitkeep
+!data/processed/.gitkeep
+
+# Vector store / caches
+qdrant_storage/
+.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
